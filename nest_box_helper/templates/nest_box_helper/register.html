@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+<form class="form-signin" method='post'>
+  {% csrf_token %}
+
+  <div class="birdimage">
+    <img class="mb-4" src="\static\images\bird.jpg" width="145" height="99">
+  </div>
+
+  <h1 class="logintext h3 mb-3">Register Your Account</h1>
+  <input type="email" name='email' id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <input type="text" name='username' id="inputUsername" class="form-control" placeholder="Username" required>
+  <input type="password" name='password1' id="inputPassword1" class="form-control" placeholder="Password" required>
+  <input type="password" name='password2' id="inputPassword2" class="form-control" placeholder="Confirm Password" required>
+  <button class="btn btn-lg btn-light btn-block" type="submit">Register</button>
+
+  <div class="error-container">
+      {% for field in registration_form %}
+        {% for error in field.errors %}
+          <p>{{error}}</p>
+        {% endfor %}
+      {% endfor %}
+
+      {% if registration_form.non_field_errors %}
+        <p>{{registration_form.non_field_errors}}</p>
+      {% endif %}
+  </div>
+
+</form>
+
+{% endblock %}

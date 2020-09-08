@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+
+<h3 class="summary-container">Summarize Attempt</h3>
+<h5 id="box-details">{{park}}</h5>
+<h5 id="box-details">Box # {{box}} - Attempt # {{attempt.attempt_number}} </h5>
+<h5>Total Visits: {{num_sheets}}</h5>
+
+<table class="table table-bordered table-striped table-responsive-lg">
+  <thead>
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Species</th>
+      <th scope="col">Eggs</th>
+      <th scope="col">Live Young</th>
+      <th scope="col">Dead Young</th>
+      <th scope="col">Nest Status</th>
+      <th scope="col">Adult Activity</th>
+      <th scope="col">Young Status</th>
+      <th scope="col">Management Activity</th>
+      <th scope="col">Cowbird Evidence</th>
+      <th scope="col">Comments</th>
+    </tr>
+  </thead>
+
+  {% for sheet in table_sheets %}
+  <tbody>
+      <th class="table-light" scope="row">{{sheet.date|date:"n/j/y"}}</th>
+      <td class="table-light">{{sheet.species}}</td>
+      <td class="table-light">{{sheet.eggs}}</td>
+      <td class="table-light">{{sheet.live_young}}</td>
+      <td class="table-light">{{sheet.dead_young}}</td>
+      <td class="table-light">{{sheet.nest_status}}</td>
+      <td class="table-light">{{sheet.adult_activity}}</td>
+      <td class="table-light">{{sheet.young_status}}</td>
+      <td class="table-light">{{sheet.management_activity}}</td>
+      <td class="table-light">{{sheet.cowbird_evidence}}</td>
+      <td class="table-light">{{sheet.comments}}</td>
+  </tbody>
+  {% endfor %}
+</table>
+
+
+
+
+<a href="{% url 'attempt_detail' park.id box.id attempt_id %}"><svg viewBox="0 0 16 16" id="summarize-back" class="back_arrow bi bi-arrow-left-square-fill">
+  <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.354 10.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L6.207 7.5H11a.5.5 0 0 1 0 1H6.207l2.147 2.146z"/>
+  </svg></a>
+
+
+{% endblock %}

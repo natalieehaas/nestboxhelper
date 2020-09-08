@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'home' %}"><svg viewBox="0 0 16 16" class="navbar-tree bi bi-tree-fill">
+  <path fill-rule="evenodd" d="M8 0a.5.5 0 0 1 .416.223l3 4.5A.5.5 0 0 1 11 5.5h-.098l2.022 3.235a.5.5 0 0 1-.424.765h-.191l1.638 3.276a.5.5 0 0 1-.447.724h-11a.5.5 0 0 1-.447-.724L3.69 9.5H3.5a.5.5 0 0 1-.424-.765L5.098 5.5H5a.5.5 0 0 1-.416-.777l3-4.5A.5.5 0 0 1 8 0z"/>
+  <path d="M7 13h2v3H7v-3z"/>
+
+</svg></a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span></button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav mr-auto">
+
+    {% if request.user.is_authenticated %}
+
+      <li class="nav-item active">
+        <a style= "color: #667C70" class="nav-link" href="{% url 'dashboard' %}">Dashboard <span class="sr-only">(current)</span></a></li>
+      <li class="nav-item">
+        <a style= "color: #667C70" class="nav-link" href="{% url 'account_update' %}">Update Account</a></li>
+      <li class="nav-item">
+        <a style= "color: #667C70" class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+
+
+    {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'register' %}">Register</a></li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a></li>
+    {% endif %}
+  </ul>
+</div>
+
+</nav>

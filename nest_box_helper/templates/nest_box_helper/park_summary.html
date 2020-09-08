@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+<div class="content-container">
+
+  <h3>{{ park.park_name}}</h3>
+
+  <div class="park_list_container">
+    {% if box_list %}
+    {% for box in box_list %}
+      <p><a href="{% url 'attempt_summary' park.park_name_id box.id  %}"><svg viewBox="0 0 16 16" class="bi bi-arrow-right-circle">
+        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path fill-rule="evenodd" d="M7.646 11.354a.5.5 0 0 1 0-.708L10.293 8 7.646 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z"/>
+        <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/></svg> Box #{{box.box_number}}</a></p>
+    {% endfor %}
+
+    {% else %}
+      <p id="no-items-notice">This park does not have any boxes yet!</p>
+    {% endif %}
+  </div>
+
+    <a href="{% url 'add_box' park.park_name_id %}"><button class="btn btn-lg btn-light">Add Box!</button></a>
+
+    <a href="{% url 'dashboard' %}"><svg viewBox="0 0 16 16" class="back_arrow bi bi-arrow-left-square-fill">
+      <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.354 10.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L6.207 7.5H11a.5.5 0 0 1 0 1H6.207l2.147 2.146z"/>
+    </svg></a>
+
+    <a href="{% url 'delete_user_park' park.id %}"><button class="trash_can bi bi-trash" onclick="if(confirm('Are you sure you want to delete {{park.park_name}}? This action cannot be undone. ')){}else{return false;};"
+        class="delete btn btn-sm btn-primary"><svg viewBox="0 0 16 16">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+      </svg></button></a></a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+<div class="content-container">
+
+  <h3>{{park_obj}}</h3>
+  <h5 id="box-details">Box # {{box_obj.box_number}} - Attempt # {{attempt_obj}}</h5>
+    <a href="{% url 'delete_attempt' park_id box_id attempt_id %}"></a>
+
+  <div class="sheet-list-container">
+    {% if sorted_sheet_list %}
+      {% for sheet in sorted_sheet_list %}
+        <a href="{% url 'detail_sheet' park_id box_id attempt_id sheet.slug %}" class="list-group-item list-group-item-action list-group-item-light">
+          <label>{{sheet.date}}</label>
+          {% if sheet.eggs %}
+            <label id="sheet"> - {{sheet.eggs}} Eggs</label>
+          {% endif %}
+
+          {% if sheet.live_young %}
+            <label id="sheet"> - {{sheet.live_young}} Live Young</label>
+          {% endif %}
+        </a>
+      {% endfor %}
+
+      <p id="data-instructions">* Ready for end-of-season data entry? Click the "Data" button for this Attempt's compiled sheet data!</p>
+
+    {% else %}
+      <p id="no-items-notice">This attempt does not have any sheets yet!</p>
+    {% endif %}
+  </div>
+
+
+
+    <a href="{% url 'create_sheet' park_id box_id attempt_id %}"><button class="add btn btn-lg btn-light">Add Sheet!</button></a>
+
+    <a href="{% url 'delete_attempt' park_id box_id attempt_id %}"><button class="trash_can" onclick="if(confirm('Are you sure you want to delete Attempt #{{attempt_obj.attempt_number}} for Box #{{box_obj.box_number}} in {{park_obj.park_name}}? You will lose any related sheets.')){}else{return false;};"
+        class="btn btn-sm btn-primary"><svg viewBox="0 0 16 16" class="bi bi-trash">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg></button></a>
+
+    <a href="{% url 'attempt_summary' park_id box_id %}"><svg viewBox="0 0 16 16" class="back_arrow bi bi-arrow-left-square-fill">
+        <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.354 10.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L6.207 7.5H11a.5.5 0 0 1 0 1H6.207l2.147 2.146z"/></svg></a>
+
+    {% if sorted_sheet_list %}
+      <a href="{% url 'summarize_attempt' attempt_id %}"><button id="summarize-data-btn" class="btn btn-lg btn-light">Data!</button><a>
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

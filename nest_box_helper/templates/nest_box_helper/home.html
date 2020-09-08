@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+<div class="home-container">
+
+  <div class="welcome-bullets">
+
+    <h2>Welcome to Nest Box Helper</h2>
+    <h4>Your paperless monitoring solution!</h4>
+
+    <h5><svg viewBox="0 0 16 16" class="bi bi-check-square"><path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+      <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+      </svg> No paper, pens, or clipboards required! </h5>
+
+
+    <h5><svg viewBox="0 0 16 16" class="bi bi-check-square"><path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+      <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+      </svg> Easily track your nest box monitoring visits.</h5>
+
+
+    <h5><svg viewBox="0 0 16 16" class="bi bi-check-square"><path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+      <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+      </svg> Data is stored for quick retrieval to streamline end-of-season data entry.</h5>
+
+
+    <h5><svg viewBox="0 0 16 16" class="bi bi-check-square"><path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+      <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+      </svg> Save, access, and update nesting activity for every level : Parks, Boxes, Attempts, Sheets </h5>
+
+  {% if request.user.is_authenticated %}
+      <a href="{% url 'dashboard' %}"><button id="home-button" class="add btn btn-lg btn-light">View Your Data!</button></a>
+
+  {% else %}
+      <div class="not-authenticated-welcome">
+        <p>Already have an account? <a href={% url 'login' %}>Log In</a></p>
+        <p>New here? Make an account! <a href={% url 'register' %}>Register</a></p>
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+
+{% endblock %}

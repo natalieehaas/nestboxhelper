@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+<form class="form-signin" method='post'>{% csrf_token %}
+
+  <div class="birdimage">
+    <img class="mb-4" src="\static\images\bird.jpg" width="145" height="99">
+  </div>
+
+  {% if request.user.username %}
+    <h1 class="logintext h3 mb-3">{{user.username}}'s Account</h1>
+  {% endif %}
+
+  <input type="email" name='email' id="inputEmail" class="form-control" placeholder="Email address" required autofocus value={{account_form.initial.email}}>
+  <input type="text" name='username' id="inputUsername" class="form-control" placeholder="Username" required value={{account_form.initial.username}}>
+  <button class="update-form-btn btn btn-lg btn-light btn-block" type="submit">Save Changes</button>
+
+  <div class="error-container">
+    {% for field in account_form %}
+      {% for error in field.errors %}
+        <p>{{error}}</p>
+      {% endfor %}
+    {% endfor %}
+
+    {% if account_form.non_field_errors %}
+      <p>{{login_form.non_field_errors}}</p>
+    {% endif %}
+  </div>
+
+  {% if success_message %}
+    <p class="success-message">{{success_message}}</p>
+  {% endif %}
+
+</form>
+
+<div class="d-flex flex-column">
+  <p class="change-password m-auto"><a href="{% url 'password_change' %}">Change password</a></p>
+</div>
+
+{% endblock %}

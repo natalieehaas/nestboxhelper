@@ -1,0 +1,50 @@
+{% load static %}
+<html>
+<head>
+	{% include 'snippets/header.html' %}
+	<title>Nest Box Helper</title>
+	<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+	<script src="{% static 'js/jquery.3.4.1.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.4.3.1.min.js' %}"></script>
+
+	<link rel="stylesheet" href="{% static 'css/bootstrap.4.5.0.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.4.3.1.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/my_style.css' %}">
+
+	<!-- custom datepicker -->
+	<link rel="stylesheet" href="{% static 'css/jquery-ui.1.12.1.css' %}">
+	<script src="{% static 'js/jquery-ui.1.12.1.js' %}"></script>
+
+	<script>
+	$( function() {
+	  $( "#datepicker" ).datepicker();
+	} );
+	</script>
+</head>
+<body>
+
+  {% include 'snippets/navbar.html' %}
+
+  {% if request.user.is_authenticated %}
+    {% if request.user.username %}
+      <h1 class="greeting">Hello, {{request.user.username}}!</h1>
+    {% endif %}
+  {% endif %}
+
+<div class="background_image row first-info" id="background-image" >
+
+  <div class="container-md viewpoint">
+    <div class="jumbotron container-fluid">
+      <div class="container">
+        {% block body_block %}
+
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+
+</div>
+{% include 'snippets/footer.html' %}
+</body>
+</html>
